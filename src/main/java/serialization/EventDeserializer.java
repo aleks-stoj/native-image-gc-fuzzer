@@ -1,7 +1,8 @@
-package deserializer;
+package serialization;
 
 import events.GCEvent;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,8 +15,16 @@ public class EventDeserializer {
         try(FileInputStream file = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(file)) {
 
-            GCEvent event = (GCEvent) in.readObject();
-            events.add(event);
+            while (true) {
+                try {
+                    GCEvent event = (GCEvent) in.readObject();
+                    events.add(event);
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+
+            System.out.println("Events deserialized");
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Deserialization failed: " + e.getMessage());
