@@ -1,3 +1,3 @@
 package events;
 
-public record AllocateObject() implements GCEvent {}
+public record AllocateObject(int objectId, int classId) implements GCEvent {}
