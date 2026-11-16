@@ -24,7 +24,7 @@ public class EventDeserializer {
                 }
             }
 
-            System.out.println("Events deserialized");
+            System.out.println("Event(s) deserialized!");
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Deserialization failed: " + e.getMessage());
